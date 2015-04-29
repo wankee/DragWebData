@@ -61,10 +61,6 @@ public class HtmlProcess {
 		String temp;
 		StringBuffer sb = new StringBuffer();
 		
-		
-		
-		
-		
 		HttpURLConnection connection = null;
 		
 		try {
@@ -141,7 +137,7 @@ public class HtmlProcess {
 					.replaceAll("<DIV.*>.*</DIV>", "")
 					.replaceAll("<FONT .*>.*</FONT>", "")
 					.replaceAll("<BR><BR>", "\n").replaceAll("<BR>", "\n");
-			System.out.println("text====>"+text);
+			System.out.println("=======>"+text.replaceAll(".*<TITLE>(.*)</TITLE>.*", "$1"));
 			if (!mContent.matches("<TITLE>第[一二三四五六七八九十]{1,3}[回章] (.*)</TITLE>*")) {
 				return outTag(text.replaceAll("<TITLE>([一二三四五六七八九十]{1,3})(( .*)|)</TITLE>", "第$1回$2"));
 			}
@@ -188,10 +184,12 @@ public class HtmlProcess {
 		try {
 			in = new BufferedInputStream(new URL(url).openStream());
 			FileOutputStream fot = new FileOutputStream(file);
-			int t;
-			while ((t=in.read()) != -1) {
-				fot.write(t);
-				fot.flush();
+			byte[] buffer=new byte[1024];
+			int len;
+			while ((len=in.read(buffer)) != -1) {
+				//fot.wr
+				fot.write(buffer,0,len);
+				//fot.flush();
 			}
 			in.close();
 			fot.close();

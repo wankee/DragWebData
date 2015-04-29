@@ -39,7 +39,7 @@ public class Book {
 		//System.out.println();
 		new File(bookDir).mkdirs();
 		generateCover(bookDir);
-		generateContent(bookDir);
+		//generateContent(bookDir);
 	}
 	private void generateContent(String bookDir) {
 		// TODO Auto-generated method stub
